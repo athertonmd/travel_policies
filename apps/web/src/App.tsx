@@ -9,6 +9,7 @@ import { ReviewDetailPage } from './pages/ReviewDetailPage';
 import { PublishedPolicyPage } from './pages/PublishedPolicyPage';
 import { PolicyComparisonPage } from './pages/PolicyComparisonPage';
 import { KnowledgeBasePage } from './pages/KnowledgeBasePage';
+import { AssistantPage } from './pages/AssistantPage';
 import { AdminPage } from './pages/AdminPage';
 
 export function App() {
@@ -28,6 +29,7 @@ export function App() {
         <Route path="/policies/:policyId" element={<PublishedPolicyPage />} />
         <Route path="/policies/:policyId/comparison" element={<PolicyComparisonPage />} />
         <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+        <Route path="/assistant" element={<AssistantPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>

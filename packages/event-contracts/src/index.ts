@@ -7,3 +7,4 @@ export * from './publication-events';
 export * from './comparison-events';
 export * from './knowledge-base-events';
 export * from './api-events';
+export * from './assistant-events';

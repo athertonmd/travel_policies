@@ -6,6 +6,7 @@ const navItems = [
   { path: '/dashboard', label: 'Dashboard', roles: ['SystemAdmin', 'TMCAdmin'] },
   { path: '/enterprises', label: 'Enterprises', roles: ['SystemAdmin', 'TMCAdmin'] },
   { path: '/reviews', label: 'Reviews', roles: ['SystemAdmin', 'TMCAdmin', 'Reviewer'] },
+  { path: '/assistant', label: 'Policy Assistant', roles: ['SystemAdmin', 'TMCAdmin', 'Reviewer'] },
   { path: '/knowledge-base', label: 'Knowledge Base', roles: ['SystemAdmin', 'TMCAdmin', 'Reviewer'] },
   { path: '/admin', label: 'Administration', roles: ['SystemAdmin', 'TMCAdmin'] },
 ];
