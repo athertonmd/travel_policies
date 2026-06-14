@@ -1,0 +1,11 @@
+{
+  "name": "@tpip/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Web app: not implemented in Project 1'",
+    "lint": "echo 'Web app: not implemented in Project 1'",
+    "test": "echo 'Web app: not implemented in Project 1'",
+    "typecheck": "echo 'Web app: not implemented in Project 1'"
+  }
+}

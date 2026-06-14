@@ -1,0 +1,17 @@
+{
+  "name": "tpip",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Travel Policy Intelligence Platform",
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "clean": "pnpm -r clean"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

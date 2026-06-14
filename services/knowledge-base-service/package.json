@@ -1,0 +1,11 @@
+{
+  "name": "@tpip/knowledge-base-service",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Knowledge base service: not implemented in Project 1'",
+    "lint": "echo 'Knowledge base service: not implemented in Project 1'",
+    "test": "echo 'Knowledge base service: not implemented in Project 1'",
+    "typecheck": "echo 'Knowledge base service: not implemented in Project 1'"
+  }
+}

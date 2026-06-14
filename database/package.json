@@ -1,0 +1,11 @@
+{
+  "name": "@tpip/database",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Database migrations: no build step'",
+    "lint": "echo 'Database migrations: no lint step'",
+    "test": "echo 'Database migrations: schema validation only'",
+    "typecheck": "echo 'Database migrations: no typecheck step'"
+  }
+}
