@@ -239,7 +239,42 @@ importers:
         specifier: 3.1.3
         version: 3.1.3(@types/node@22.15.21)
 
-  services/knowledge-base-service: {}
+  services/knowledge-base-service:
+    dependencies:
+      '@tpip/event-contracts':
+        specifier: workspace:*
+        version: link:../../packages/event-contracts
+      '@tpip/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
+      '@tpip/shared-types':
+        specifier: workspace:*
+        version: link:../../packages/shared-types
+      uuid:
+        specifier: 11.1.0
+        version: 11.1.0
+    devDependencies:
+      '@types/node':
+        specifier: 22.15.21
+        version: 22.15.21
+      '@types/uuid':
+        specifier: 10.0.0
+        version: 10.0.0
+      '@typescript-eslint/eslint-plugin':
+        specifier: 8.32.1
+        version: 8.32.1(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)(typescript@5.7.3)
+      '@typescript-eslint/parser':
+        specifier: 8.32.1
+        version: 8.32.1(eslint@8.57.1)(typescript@5.7.3)
+      eslint:
+        specifier: 8.57.1
+        version: 8.57.1
+      typescript:
+        specifier: 5.7.3
+        version: 5.7.3
+      vitest:
+        specifier: 3.1.3
+        version: 3.1.3(@types/node@22.15.21)
 
   services/policy-api-service:
     dependencies:

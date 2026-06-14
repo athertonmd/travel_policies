@@ -1,0 +1,13 @@
+export { KnowledgeBaseService } from './services/knowledge-base-service';
+export type { AuditRepository, CorrectionStore } from './services/knowledge-base-service';
+export { chunkText } from './chunking/chunker';
+export { InMemoryEmbeddingProvider } from './embedding/in-memory-embedding-provider';
+export type { EmbeddingProvider } from './embedding/embedding-provider';
+export { InMemoryVectorStore } from './vector-store/in-memory-vector-store';
+export type { VectorStore } from './vector-store/vector-store';
+export { InMemoryEventBus } from './events/event-bus';
+export type { EventBus } from './events/event-bus';
+export { InMemoryCorrectionStore } from './repositories/in-memory-correction-store';
+export { InMemoryAuditRepository } from './repositories/in-memory-audit-repository';
+export * from './domain/types';
+export * from './domain/errors';

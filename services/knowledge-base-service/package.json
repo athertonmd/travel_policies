@@ -2,10 +2,28 @@
   "name": "@tpip/knowledge-base-service",
   "version": "0.1.0",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "echo 'Knowledge base service: not implemented in Project 1'",
-    "lint": "echo 'Knowledge base service: not implemented in Project 1'",
-    "test": "echo 'Knowledge base service: not implemented in Project 1'",
-    "typecheck": "echo 'Knowledge base service: not implemented in Project 1'"
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tpip/shared-types": "workspace:*",
+    "@tpip/event-contracts": "workspace:*",
+    "@tpip/observability": "workspace:*",
+    "uuid": "11.1.0"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3",
+    "@types/node": "22.15.21",
+    "@types/uuid": "10.0.0",
+    "@typescript-eslint/parser": "8.32.1",
+    "@typescript-eslint/eslint-plugin": "8.32.1",
+    "eslint": "8.57.1",
+    "vitest": "3.1.3"
   }
 }
