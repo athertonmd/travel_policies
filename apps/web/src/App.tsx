@@ -8,6 +8,7 @@ import { ReviewsPage } from './pages/ReviewsPage';
 import { ReviewDetailPage } from './pages/ReviewDetailPage';
 import { PublishedPolicyPage } from './pages/PublishedPolicyPage';
 import { PolicyComparisonPage } from './pages/PolicyComparisonPage';
+import { PolicyChangeSummaryPage } from './pages/PolicyChangeSummaryPage';
 import { KnowledgeBasePage } from './pages/KnowledgeBasePage';
 import { AssistantPage } from './pages/AssistantPage';
 import { AdminPage } from './pages/AdminPage';
@@ -28,6 +29,7 @@ export function App() {
         <Route path="/reviews/:reviewId" element={<ReviewDetailPage />} />
         <Route path="/policies/:policyId" element={<PublishedPolicyPage />} />
         <Route path="/policies/:policyId/comparison" element={<PolicyComparisonPage />} />
+        <Route path="/policies/:policyId/summary" element={<PolicyChangeSummaryPage />} />
         <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
         <Route path="/assistant" element={<AssistantPage />} />
         <Route path="/admin" element={<AdminPage />} />
