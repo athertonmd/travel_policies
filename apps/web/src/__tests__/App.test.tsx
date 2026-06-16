@@ -44,7 +44,7 @@ describe('Navigation', () => {
   it('should render dashboard page', async () => {
     await loginAndNavigate('/dashboard');
     expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument();
-    expect(screen.getByText('Total Enterprises')).toBeInTheDocument();
+    expect(screen.getByText('Total Documents')).toBeInTheDocument();
   });
 
   it('should render enterprises page', async () => {
