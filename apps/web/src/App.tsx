@@ -13,6 +13,7 @@ import { PolicyChangeSummaryPage } from './pages/PolicyChangeSummaryPage';
 import { KnowledgeBasePage } from './pages/KnowledgeBasePage';
 import { AssistantPage } from './pages/AssistantPage';
 import { AdminPage } from './pages/AdminPage';
+import { SystemStatusPage } from './pages/SystemStatusPage';
 
 export function App() {
   const { isAuthenticated } = useAuth();
@@ -35,6 +36,7 @@ export function App() {
         <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
         <Route path="/assistant" element={<AssistantPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/system/status" element={<SystemStatusPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Layout>

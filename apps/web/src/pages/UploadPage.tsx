@@ -1,13 +1,15 @@
 import { useState, useCallback } from 'react';
+import { apiClient, ApiError } from '../lib/api-client';
 
 /**
  * Policy Upload Page - supports PDF and DOCX via drag-and-drop or file picker.
  * Route: /enterprises/{enterpriseId}/upload
+ * Uploads via multipart/form-data to the API server.
  */
 export function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [result, setResult] = useState<{ document_id: string; version_number: number } | null>(null);
+  const [result, setResult] = useState<{ document_id: string; version_number: number; status: string } | null>(null);
   const [error, setError] = useState('');
   const [dragOver, setDragOver] = useState(false);
 
@@ -33,15 +35,17 @@ export function UploadPage() {
     setUploading(true);
     setError('');
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const res = await fetch('/api/v1/enterprises/default/documents', { method: 'POST', body: formData });
-      if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Upload failed'); }
-      const data = await res.json();
+      // TODO: Get enterpriseId from route params or context
+      const enterpriseId = 'default';
+      const data = await apiClient.uploadDocument(enterpriseId, file);
       setResult(data);
       setFile(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Upload failed');
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError(err instanceof Error ? err.message : 'Upload failed');
+      }
     } finally {
       setUploading(false);
     }
@@ -88,6 +92,7 @@ export function UploadPage() {
           <p className="text-green-800 font-medium">Upload successful</p>
           <p className="text-sm text-green-600 mt-1">Document ID: {result.document_id}</p>
           <p className="text-sm text-green-600">Version: {result.version_number}</p>
+          <p className="text-sm text-green-600">Status: {result.status}</p>
         </div>
       )}
     </div>
