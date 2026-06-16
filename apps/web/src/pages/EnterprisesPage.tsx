@@ -1,7 +1,17 @@
+import { Link } from 'react-router-dom';
+
 export function EnterprisesPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Enterprises</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Enterprises</h1>
+        <Link
+          to="/enterprises/default/upload"
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700"
+        >
+          Upload Policy
+        </Link>
+      </div>
       <div className="bg-white shadow rounded-lg overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

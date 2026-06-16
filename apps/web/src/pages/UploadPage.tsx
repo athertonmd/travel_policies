@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { apiClient, ApiError } from '../lib/api-client';
 
 /**
@@ -53,6 +54,9 @@ export function UploadPage() {
 
   return (
     <div>
+      <div className="flex items-center space-x-4 mb-6">
+        <Link to="/enterprises" className="text-indigo-600 hover:text-indigo-800 text-sm">← Back to Enterprises</Link>
+      </div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Upload Policy Document</h1>
       <div
         className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${dragOver ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 bg-white'}`}
