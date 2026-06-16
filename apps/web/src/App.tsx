@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { EnterprisesPage } from './pages/EnterprisesPage';
+import { UploadPage } from './pages/UploadPage';
 import { ReviewsPage } from './pages/ReviewsPage';
 import { ReviewDetailPage } from './pages/ReviewDetailPage';
 import { PublishedPolicyPage } from './pages/PublishedPolicyPage';
@@ -25,6 +26,7 @@ export function App() {
       <Routes>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/enterprises" element={<EnterprisesPage />} />
+        <Route path="/enterprises/:enterpriseId/upload" element={<UploadPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/reviews/:reviewId" element={<ReviewDetailPage />} />
         <Route path="/policies/:policyId" element={<PublishedPolicyPage />} />

@@ -1,0 +1,43 @@
+{
+  "name": "@tpip/api-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tpip/shared-types": "workspace:*",
+    "@tpip/event-contracts": "workspace:*",
+    "@tpip/validation": "workspace:*",
+    "@tpip/observability": "workspace:*",
+    "@aws-sdk/client-s3": "3.821.0",
+    "@aws-sdk/s3-request-presigner": "3.821.0",
+    "express": "4.21.2",
+    "multer": "1.4.5-lts.2",
+    "pg": "8.16.0",
+    "uuid": "11.1.0",
+    "cors": "2.8.5",
+    "dotenv": "16.5.0"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3",
+    "@types/node": "22.15.21",
+    "@types/express": "5.0.2",
+    "@types/multer": "1.4.12",
+    "@types/pg": "8.15.4",
+    "@types/cors": "2.8.19",
+    "@types/uuid": "10.0.0",
+    "@typescript-eslint/parser": "8.32.1",
+    "@typescript-eslint/eslint-plugin": "8.32.1",
+    "eslint": "8.57.1",
+    "tsx": "4.19.4",
+    "vitest": "3.1.3"
+  }
+}
