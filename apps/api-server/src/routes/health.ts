@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { checkDatabaseConnection } from '../repositories/postgres/pg-client.js';
+import { config } from '../config.js';
 
 export function healthRoutes(): Router {
   const router = Router();
@@ -9,10 +9,24 @@ export function healthRoutes(): Router {
   });
 
   router.get('/ready', async (_req: Request, res: Response) => {
-    const dbConnected = await checkDatabaseConnection();
+    if (config.storageMode === 'local') {
+      res.json({ database: 'local-file', s3: 'local-file', mode: 'local' });
+      return;
+    }
+
+    // AWS mode — check PostgreSQL
+    let dbConnected = false;
+    try {
+      const { checkDatabaseConnection } = await import('../repositories/postgres/pg-client.js');
+      dbConnected = await checkDatabaseConnection();
+    } catch {
+      dbConnected = false;
+    }
+
     res.json({
       database: dbConnected ? 'connected' : 'disconnected',
-      s3: 'connected', // S3 check is lightweight, assume connected
+      s3: 'connected',
+      mode: 'aws',
     });
   });
 

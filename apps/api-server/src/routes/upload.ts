@@ -2,11 +2,37 @@ import { Router, Request, Response } from 'express';
 import multer from 'multer';
 import { randomUUID } from 'crypto';
 import { createHash } from 'crypto';
-import { S3StorageProvider } from '../storage/s3-storage-provider.js';
-import { PgDocumentRepository } from '../repositories/postgres/pg-document-repository.js';
+
+/** Common storage interface */
+interface StorageProvider {
+  upload(key: string, content: Buffer, contentType: string): Promise<{ storage_location: string; checksum: string }>;
+}
+
+/** Common document repository interface */
+interface DocumentRepository {
+  create(doc: DocumentRecord): Promise<DocumentRecord>;
+  findByEnterprise(enterpriseId: string): Promise<DocumentRecord[]>;
+  getLatestVersionNumber(enterpriseId: string): Promise<number>;
+}
+
+interface DocumentRecord {
+  document_id: string;
+  tenant_id: string;
+  enterprise_id: string;
+  version_number: number;
+  filename: string;
+  content_type: string;
+  file_size: number;
+  storage_location: string;
+  uploaded_by: string;
+  uploaded_at: string;
+  status: string;
+  checksum: string;
+}
 
 const upload = multer({
-  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 50 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     const allowed = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     if (allowed.includes(file.mimetype)) {
@@ -17,7 +43,7 @@ const upload = multer({
   },
 });
 
-export function uploadRoutes(storage: S3StorageProvider, documentRepo: PgDocumentRepository): Router {
+export function uploadRoutes(storage: StorageProvider, documentRepo: DocumentRepository): Router {
   const router = Router();
 
   router.post(
@@ -26,7 +52,7 @@ export function uploadRoutes(storage: S3StorageProvider, documentRepo: PgDocumen
     async (req: Request, res: Response) => {
       try {
         const enterpriseId = Array.isArray(req.params.enterpriseId) ? req.params.enterpriseId[0] : req.params.enterpriseId || '';
-        const tenantId = Array.isArray(req.headers['x-tenant-id']) ? req.headers['x-tenant-id'][0] : (req.headers['x-tenant-id'] as string) || '';
+        const tenantId = Array.isArray(req.headers['x-tenant-id']) ? req.headers['x-tenant-id'][0] : (req.headers['x-tenant-id'] as string) || 'default-tenant';
         const userId = Array.isArray(req.headers['x-user-id']) ? req.headers['x-user-id'][0] : (req.headers['x-user-id'] as string) || 'anonymous';
         const file = req.file;
 
@@ -35,18 +61,15 @@ export function uploadRoutes(storage: S3StorageProvider, documentRepo: PgDocumen
           return;
         }
 
-        // Generate version number
         const latestVersion = await documentRepo.getLatestVersionNumber(enterpriseId);
         const versionNumber = latestVersion + 1;
 
-        // Store in S3
         const documentId = randomUUID();
         const s3Key = `${tenantId}/${enterpriseId}/${documentId}/${file.originalname}`;
         const checksum = createHash('sha256').update(file.buffer).digest('hex');
 
         const storageResult = await storage.upload(s3Key, file.buffer, file.mimetype);
 
-        // Create database record
         const now = new Date().toISOString();
         const doc = await documentRepo.create({
           document_id: documentId,
@@ -62,8 +85,6 @@ export function uploadRoutes(storage: S3StorageProvider, documentRepo: PgDocumen
           status: 'Uploaded',
           checksum,
         });
-
-        // TODO: Emit PolicyDocumentUploaded event and trigger extraction pipeline
 
         res.status(201).json({
           document_id: doc.document_id,

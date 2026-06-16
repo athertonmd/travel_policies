@@ -1,8 +1,12 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+export type StorageMode = 'local' | 'aws';
+
 export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
+  storageMode: (process.env.TPIP_STORAGE_MODE || 'local') as StorageMode,
+  localDataDir: process.env.TPIP_LOCAL_DATA_DIR || './.tpip-data',
   database: {
     url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/tpip',
   },

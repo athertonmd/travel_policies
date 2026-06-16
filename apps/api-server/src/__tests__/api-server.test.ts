@@ -6,7 +6,15 @@ describe('API Server Configuration', () => {
     expect(config.port).toBe(3001);
   });
 
-  it('should have default database URL', () => {
+  it('should default to local storage mode', () => {
+    expect(config.storageMode).toBe('local');
+  });
+
+  it('should have default local data directory', () => {
+    expect(config.localDataDir).toBe('./.tpip-data');
+  });
+
+  it('should have default database URL for aws mode', () => {
     expect(config.database.url).toContain('postgresql://');
   });
 
